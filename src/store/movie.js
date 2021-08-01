@@ -1,4 +1,5 @@
 import axios from 'axios'
+import _uniqBy from 'lodash/uniqBy'
 
 export default {
   // module
@@ -35,7 +36,7 @@ export default {
       const res = await axios.get(`https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${title}&type=${type}&y=${year}&page=1`)
       const { Search, totalResults } = res.data
       context.commit('updateState', {
-        movies: Search
+        movies: _uniqBy(Search, 'imdbID')
       })
       console.log(totalResults) // 266 => 27
       console.log(typeof totalResults)
@@ -49,10 +50,8 @@ export default {
           if(page > (number / 10)) break       
           const res = await axios.get(`https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${title}&type=${type}&y=${year}&page=${page}`)
           const { Search } = res.data
-          console.log(res.data)
-          console.log(Search)
           context.commit('updateState', {
-            movies: [...context.state.movies, ...Search]
+            movies: [...context.state.movies, ..._uniqBy(Search, 'imdbID')]
           })
         }
 
