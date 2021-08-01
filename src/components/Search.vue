@@ -46,7 +46,7 @@ export default {
           items: ['movie', 'series', 'episode']
         },
         {
-          name: '',
+          name: 'number',
           items: [10, 20, 30]
         },
         {

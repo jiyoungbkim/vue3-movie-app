@@ -37,6 +37,26 @@ export default {
       context.commit('updateState', {
         movies: Search
       })
+      console.log(totalResults) // 266 => 27
+      console.log(typeof totalResults)
+    
+      const total = parseInt(totalResults, 10)
+      const pageLength = Math.ceil(total / 10)
+
+      // 추가 요청!
+      if(pageLength > 1) {
+        for(let page = 2; page <= pageLength; page += 1) {
+          if(page > (number / 10)) break       
+          const res = await axios.get(`https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${title}&type=${type}&y=${year}&page=${page}`)
+          const { Search } = res.data
+          console.log(res.data)
+          console.log(Search)
+          context.commit('updateState', {
+            movies: [...context.state.movies, ...Search]
+          })
+        }
+
+      }
     }
   }
 }
