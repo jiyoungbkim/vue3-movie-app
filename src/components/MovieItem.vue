@@ -15,9 +15,11 @@
 
 <script>
 export default {
+  // MovieList에서 넣어준 props
   props: {
     movie: {
       type: Object,
+      // 객체나 배열 데이터를 직접 사용하지 않고 함수로 만들어서 반환해야 함
       default: () => ({})
     }
   }

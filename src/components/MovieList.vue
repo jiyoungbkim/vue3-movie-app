@@ -14,6 +14,7 @@
       <div
         v-else
         class="movies">
+        <!-- computed movies 배열을 반복문으로 movie란 이름으로 props 전달 -->
         <MovieItem
           v-for="movie in movies"
           :key="movie.imdbID"

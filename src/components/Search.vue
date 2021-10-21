@@ -51,6 +51,7 @@ export default {
         },
         {
           name: 'year',
+          // 즉시 실행 함수 (() => {})()
           items: (()=> {
             const years = []
             const thisYear = new Date().getFullYear()
@@ -63,11 +64,14 @@ export default {
       ]
     }
   },
+  // store의 mutations를 실행할 때는 .commit() 메소드를, Actions를 실행할 때는 .dispatch()메소드를 사용
   methods: {
     async apply() {
       // Search movies
-      // store의 movie 모듈에 접근 dispatch로 actions사용
+      // movie는 index.js 모듈에 작성한 이름
+      // store의 movie 모듈에 접근 /dispatch로 searchMovies actions사용
       this.$store.dispatch('movie/searchMovies', {
+        // 갱신된 데이터 전달
         title: this.title,
         type: this.type,
         number: this.number,
